@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CampusReads — Milestone 5 Prototype</title>
+<style>
+:root{--primary:#006B63;--bg:#F7F8FA;--ink:#17212B;--muted:#5d6872;--line:#d9e0e5}
+*{box-sizing:border-box}body{margin:0;background:#eef1f3;color:var(--ink);font:16px/1.5 Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif}
+header{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:18px max(20px,calc((100% - 1000px)/2));background:#fff;border-bottom:1px solid var(--line)}
+.brand{font-weight:800;color:var(--primary);font-size:20px}.tag{font-size:12px;letter-spacing:.08em;color:var(--muted)}
+main{max-width:1000px;margin:30px auto;padding:0 18px}.progress{display:flex;gap:8px;margin:0 auto 18px;max-width:440px}.dot{height:6px;flex:1;border-radius:99px;background:#cbd3d9}.dot.active{background:var(--primary)}
+.screen{display:none;max-width:440px;min-height:660px;margin:0 auto;background:var(--bg);border:1px solid var(--line);border-radius:24px;padding:26px;box-shadow:0 10px 32px #17212b12}.screen.active{display:flex;flex-direction:column}
+h1{font-size:28px;line-height:1.2;margin:8px 0 8px}p{margin:0 0 16px}.muted{color:var(--muted);font-size:14px}.search{border:1px solid var(--line);background:white;border-radius:12px;padding:12px 14px;margin:14px 0 20px;color:var(--muted)}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:16px}.cover{height:145px;border-radius:10px;background:linear-gradient(145deg,#dcebe8,#b6d6d0);display:flex;align-items:center;justify-content:center;color:var(--primary);font-weight:800;letter-spacing:.04em;margin-bottom:15px;text-align:center}.booktitle{font-size:18px;font-weight:750;margin-bottom:2px}.price{font-weight:800;color:var(--primary)}.pill{display:inline-block;border-radius:99px;padding:3px 10px;background:#e2f2ef;color:var(--primary);font-size:12px;font-weight:700;margin-top:9px}
+.spacer{flex:1}.btn{width:100%;border:0;border-radius:12px;padding:15px 18px;background:var(--primary);color:#fff;font-weight:750;font-size:15px;cursor:pointer}.btn:focus-visible,.back:focus-visible{outline:3px solid #e1a52c;outline-offset:3px}.back{display:inline-block;background:transparent;border:0;color:var(--primary);padding:4px 0 14px;font:inherit;font-weight:700;cursor:pointer;text-align:left}.note{font-size:12px;color:var(--muted);margin-top:12px}.success{background:#e2f2ef;border:1px solid #b5dcd5;border-radius:12px;padding:12px;color:#14574f;margin:12px 0}.test-panel{max-width:440px;margin:20px auto 0;background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;font-size:13px}.test-panel h2{font-size:15px;margin:0 0 6px}.footer{text-align:center;color:var(--muted);font-size:12px;margin:18px}
+@media(max-width:520px){main{margin:18px auto}.screen{min-height:calc(100vh - 150px);padding:20px;border-radius:18px}header{padding:14px 18px}}
+</style>
+</head>
+<body>
+<header><div class="brand">CampusReads</div><div class="tag">STUDENT BOOK EXCHANGE</div></header>
+<main>
+  <div class="progress" aria-label="Prototype progress"><span class="dot active" id="dot1"></span><span class="dot" id="dot2"></span></div>
+  <section class="screen active" id="browse" aria-labelledby="browse-title">
+    <div class="tag">STEP 1 OF 2</div>
+    <h1 id="browse-title">Browse Books</h1>
+    <p class="muted">Find affordable second-hand textbooks from other students.</p>
+    <div class="search">⌕ &nbsp; Search books or authors…</div>
+    <article class="card">
+      <div class="cover">PYTHON<br>PROGRAMMING</div>
+      <div class="booktitle">Python Programming</div>
+      <div class="muted">John Smith</div>
+      <div class="price">₹250</div>
+      <span class="pill">Good condition</span>
+    </article>
+    <p class="muted">Sample listing using fictional practice data.</p>
+    <div class="spacer"></div>
+    <button class="btn" id="view-details">View Details →</button>
+    <div class="note">Decision: open the selected book listing.</div>
+  </section>
+  <section class="screen" id="details" aria-labelledby="details-title">
+    <div class="tag">STEP 2 OF 2</div>
+    <button class="back" id="back">← Back to Browse</button>
+    <h1 id="details-title">Book Details</h1>
+    <article class="card">
+      <div class="cover">PYTHON<br>PROGRAMMING</div>
+      <div class="booktitle">Python Programming</div>
+      <div class="muted">by John Smith</div>
+      <div class="price" style="margin-top:10px">₹250</div>
+      <span class="pill">Good condition</span>
+      <hr style="border:0;border-top:1px solid var(--line);margin:16px 0">
+      <p>A used introductory Python programming book in good condition.</p>
+      <p class="muted">Availability: Available</p>
+    </article>
+    <div class="spacer"></div>
+    <button class="btn" id="request" type="button">Request Book</button>
+    <div class="note">Decision: review the listing before deciding to request it.</div>
+    <div class="success" id="request-message" hidden role="status">Demo only: request action acknowledged. No real request was sent.</div>
+  </section>
+  <aside class="test-panel">
+    <h2>Milestone 5 test notes</h2>
+    <div><strong>Ordinary case:</strong> Select “View Details,” then “Back to Browse.” Both navigation actions should work.</div>
+    <div style="margin-top:6px"><strong>Boundary case:</strong> Open Book Details directly via the prototype controls, then use Back to Browse; confirm it returns to Browse without losing the sample listing.</div>
+    <div style="margin-top:6px"><strong>Learning:</strong> A clear starting screen and explicit forward/back actions make the prototype flow easy to test.</div>
+  </aside>
+  <div class="footer">Fictional sample content • No real student records or requests</div>
+</main>
+<script>
+const browse=document.getElementById('browse'), details=document.getElementById('details');
+function show(screen){
+  const isBrowse=screen==='browse';
+  browse.classList.toggle('active',isBrowse);
+  details.classList.toggle('active',!isBrowse);
+  document.getElementById('dot1').classList.toggle('active',isBrowse);
+  document.getElementById('dot2').classList.toggle('active',!isBrowse);
+  document.getElementById('request-message').hidden=true;
+  window.scrollTo({top:0,behavior:'instant'});
+}
+document.getElementById('view-details').addEventListener('click',()=>show('details'));
+document.getElementById('back').addEventListener('click',()=>show('browse'));
+document.getElementById('request').addEventListener('click',()=>{document.getElementById('request-message').hidden=false;});
+</script>
+</body>
+</html>
